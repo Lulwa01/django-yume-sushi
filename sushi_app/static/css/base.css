@@ -1,0 +1,22 @@
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    font-family: Made Tommy;
+}
+
+img {
+    width: 200px;
+}
+
+h1 {
+    color: #3A31FE;
+}
+
+p {
+    color: #38383A;
+    font-weight: 400;
+}
