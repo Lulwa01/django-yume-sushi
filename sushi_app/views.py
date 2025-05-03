@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView
-from .models import Order
+from .models import Order, Side
+from .forms import SideForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -30,7 +32,11 @@ def order_index(request):
 
 def order_detail(request, order_id):
     order = Order.objects.get(id=order_id)
-    return render(request, 'orders/detail.html', {'order': order})
+    side_form = SideForm()
+    return render(request, 'orders/detail.html', {
+        'order': order, 
+        'side_form': side_form
+    })
 
 class SushiCreate(CreateView):
     model = Order
@@ -43,3 +49,12 @@ class SushiUpdate(UpdateView):
 class SushiDelete(DeleteView):
     model = Order
     success_url = '/orders/'
+    template_name = 'sushi_app/order_confirm_delete.html'
+
+def add_side(request, order_id):
+    form = SideForm(request.POST)
+    if form.is_valid():
+        new_side = form.save(commit=False)
+        new_side.order_id = order_id
+        new_side.save()
+    return redirect('order-detail', order_id=order_id)

@@ -20,4 +20,32 @@
     </div>
   </div>
 </section>
+
+<div class="side-container">
+    <section class="sides">
+        <div class="subsection-title">
+            <h2>Add Sides</h2>
+            <img src="" alt="">
+        </div>
+        <form 
+        action="{% url 'add-side' order.id %}"
+        method="post" 
+        class="subsection-content" 
+        aria-autocomplete="off">
+            {% csrf_token %}
+            {{ side_form.as_p }}
+            <button type="submit" class="btn submit">Add Side</button>
+        </form>
+        <table>
+        <tbody>
+            {% for side in order.side_set.all %}
+            <tr>
+                <td>{{side.drinks}}</td>
+                <td>{{side.get_starter_display}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </section>
+</div>
 {% endblock %}

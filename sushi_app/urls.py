@@ -10,4 +10,5 @@ urlpatterns = [
     path('orders/new', views.SushiCreate.as_view(), name='order-create'),
     path('orders/<int:pk>/update/', views.SushiUpdate.as_view(), name='order-update'),
     path('orders/<int:pk>/delete/', views.SushiDelete.as_view(), name='order-delete'),
+    path('orders/<int:order_id>/add-side/', views.add_side, name='add-side')
 ]

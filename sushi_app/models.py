@@ -28,6 +28,29 @@ INGREDIENTS = (
     ('Sriracha', 'Sriracha'),
 )
 
+DRINKS = (
+    ('Green Tea', 'Green Tea'),
+    ('Matcha Latte', 'Matcha Latte'),
+    ('Ramune Soda', 'Ramune Soda'),
+    ('Yuzu Juice', 'Yuzu Juice'),
+    ('Calpico', 'Calpico'),
+    ('Iced Genmaicha', 'Iced Genmaicha'),
+    ('Sparkling Water', 'Sparkling Water'),
+    ('Cold Brewed Hojicha', 'Cold Brewed Hojicha'),
+    ('Plum Juice', 'Plum Juice'),
+)
+
+STARTER = (
+    ('Edamame', 'Edamame'),
+    ('Miso Soup', 'Miso Soup'),
+    ('Seaweed Salad', 'Seaweed Salad'),
+    ('Gyoza', 'Gyoza'),
+    ('Takoyaki', 'Takoyaki'),
+    ('Agedashi Tofu', 'Agedashi Tofu'),
+    ('Sunomono', 'Sunomono'),
+    ('Shishito Peppers', 'Shishito Peppers'),
+    ('Chawanmushi', 'Chawanmushi'),
+)
 
 # Create your models here.
 class Order(models.Model):
@@ -41,3 +64,12 @@ class Order(models.Model):
     
     def get_absolute_url(self):
         return reverse('order-detail', kwargs={'order_id': self.id})
+    
+class Side(models.Model):
+    drinks = models.CharField(max_length=100, choices=DRINKS)    
+    starter = models.CharField(max_length=100, choices=STARTER)
+
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.drinks} on {self.starter}"
