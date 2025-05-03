@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 INGREDIENTS = (
     ('Tuna', 'Tuna'),
@@ -29,7 +30,7 @@ INGREDIENTS = (
 
 
 # Create your models here.
-class Sushi(models.Model):
+class Order(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     ingredients = models.CharField(max_length=100, choices=INGREDIENTS)
@@ -37,3 +38,6 @@ class Sushi(models.Model):
 
     def __str__ (self):
         return self.name 
+    
+    def get_absolute_url(self):
+        return reverse('order-detail', kwargs={'order_id': self.id})

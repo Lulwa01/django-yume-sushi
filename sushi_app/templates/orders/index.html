@@ -13,6 +13,7 @@
 <section class="card-container">
     {% for order in orders %}
     <div class="card">
+        <a href="/orders/{{ order.id }}">
         <div class="card-content">
             <div class="card-img-container">
                 <img
@@ -20,9 +21,10 @@
                 alt="sushi-illustration"
                 />
             </div>
-            <h2 class="card-title">{{ order.name}}</h2>
-            <p class="card-title">{{ order.price}}</p>
+            <h2 class="card-title">{{ order.name }}</h2>
+            <p>{{ order.price }}</p>
         </div>
+    </a>
     </div>
     {% endfor %}
 </section>
