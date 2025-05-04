@@ -4,7 +4,6 @@ from . import views
 urlpatterns = [
     #routes here
     path('', views.Home.as_view(), name='home'),
-    # path('home/', views.home, name='home'),
     path('orders/', views.order_index, name='order-index'),
     path('orders/<int:order_id>/', views.order_detail, name='order-detail'),
     path('orders/new', views.SushiCreate.as_view(), name='order-create'),

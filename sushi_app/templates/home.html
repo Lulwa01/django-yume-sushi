@@ -7,15 +7,6 @@ href="{% static 'css/home.css' %}"
 />
 {% endblock %} {%block content %}
 
-<h1>Ready to build new Sushi, {{ user }}</h1>
-<hr />
-<p class="page-content">
-    At Yumi Sushi, youre the chef! Build your own sushi masterpiece, explore fresh ingredients, and let your creativity roll. 🍣✨
-</p>
-<button>
-    <a href="{% url 'order-create' %}">yes</a>
-</button>
-
 {% if not user.is_authenticated %}
 <section>
     <form action="{% url 'home' %}" method="post" class="login">
@@ -25,5 +16,16 @@ href="{% static 'css/home.css' %}"
         <button type="submit" class="btn submit">Login</button>
     </form>
 </section>
+
+{% else %}
+<h1>Ready to build new Sushi, {{ user }}</h1>
+<hr />
+<p class="page-content">
+    At Yumi Sushi, youre the chef! Build your own sushi masterpiece, explore fresh ingredients, and let your creativity roll. 🍣✨
+</p>
+<button>
+    <a href="{% url 'order-create' %}">yes</a>
+</button>
+
 {% endif %}
 {% endblock %}

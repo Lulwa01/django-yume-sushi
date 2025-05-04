@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from multiselectfield import MultiSelectField
 
 INGREDIENTS = (
     ('Tuna', 'Tuna'),
@@ -65,7 +66,7 @@ class Order(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100, choices=TYPE)
-    ingredients = models.CharField(max_length=100, choices=INGREDIENTS)
+    ingredients = MultiSelectField(choices=INGREDIENTS)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
