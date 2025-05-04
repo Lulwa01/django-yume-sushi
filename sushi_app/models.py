@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 INGREDIENTS = (
     ('Tuna', 'Tuna'),
@@ -28,6 +29,13 @@ INGREDIENTS = (
     ('Sriracha', 'Sriracha'),
 )
 
+TYPE = (
+    ('Maki', 'Maki'),
+    ('Nigiri', 'Nigiri'),
+    ('Uramaki', 'Uramaki'),
+    ('Temaki', 'Temaki'),
+)
+
 DRINKS = (
     ('Green Tea', 'Green Tea'),
     ('Matcha Latte', 'Matcha Latte'),
@@ -54,10 +62,12 @@ STARTER = (
 
 # Create your models here.
 class Order(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
+    type = models.CharField(max_length=100, choices=TYPE)
     ingredients = models.CharField(max_length=100, choices=INGREDIENTS)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__ (self):
         return self.name 
@@ -68,8 +78,7 @@ class Order(models.Model):
 class Side(models.Model):
     drinks = models.CharField(max_length=100, choices=DRINKS)    
     starter = models.CharField(max_length=100, choices=STARTER)
-
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.drinks} on {self.starter}"
+        return f"{self.drinks} + {self.starter}"

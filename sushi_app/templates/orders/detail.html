@@ -1,18 +1,21 @@
-{% extends 'base.html' %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load static %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/orders/order-detail.css' %}" />
-{% endblock %} 
-{% block content %} 
+{% endblock %}
+{% block content %}
+
 <section class="order-container">
   <div class="order-img">
     <img src="{% static 'images/sushi-illustration.png' %}" alt="sushi illustration" />
   </div>
   <div class="order-detail">
+
     <h1>{{ order.name }}</h1>
-    <p>{{order.type}}</p>
-    <p>{{order.ingredients}}</p>
-    <p>{{order.price}}</p>
+    <p>Order Number: {{ order.id}} </p>
+    <p>Type: {{ order.type }}</p>
+    <p>Ingredients: {{ order.ingredients }}</p>
+    <p>Price: ${{ order.price }}</p>
 
     <div class="order-actions">
         <a href="{% url 'order-update' order.id %}" class="btn warn">Edit</a>
@@ -22,30 +25,30 @@
 </section>
 
 <div class="side-container">
-    <section class="sides">
-        <div class="subsection-title">
-            <h2>Add Sides</h2>
-            <img src="" alt="">
-        </div>
-        <form 
-        action="{% url 'add-side' order.id %}"
-        method="post" 
-        class="subsection-content" 
-        aria-autocomplete="off">
-            {% csrf_token %}
-            {{ side_form.as_p }}
-            <button type="submit" class="btn submit">Add Side</button>
-        </form>
-        <table>
-        <tbody>
-            {% for side in order.side_set.all %}
-            <tr>
-                <td>{{side.drinks}}</td>
-                <td>{{side.get_starter_display}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        </table>
-    </section>
+  <section class="sides">
+    <div class="subsection-title">
+      <h2>Sides</h2>
+    </div>
+
+    {% if not order.side %}
+    <form 
+      action="{% url 'add-side' order.id %}" method="post" class="subsection-content" aria-autocomplete="off">
+      {% csrf_token %}
+      {{ side_form.as_p }}
+      <button type="submit" class="btn submit">Add</button>
+    </form>
+    {% else %}
+    <!-- <p>Sides already added:</p> -->
+    <table>
+      <tbody>
+        <tr>
+          <td>Drink: {{ order.side.drinks }}</td>
+          <td>Starter: {{ order.side.get_starter_display }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="{% url 'side-update' order.side.id %}" class="btn warn">Edit Side</a>
+    {% endif %}
+  </section>
 </div>
 {% endblock %}

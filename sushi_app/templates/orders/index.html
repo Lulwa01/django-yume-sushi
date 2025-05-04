@@ -26,6 +26,12 @@
         </div>
     </a>
     </div>
+    {% empty %}
+    <p class="empty-message">Opi, no sushi yet 🍣</p>
+    <button>
+        <a href="{% url 'order-create' %}">Start Creating</a>
+    </button>
+    
     {% endfor %}
 </section>
 {% endblock %}

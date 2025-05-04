@@ -4,10 +4,10 @@
 
 <div class="page-header">
     <h1>Delete Order?</h1>
-    <img src="{% static 'images/sushi-illustration.png' %}" alt="sushi illustration">
+    <!-- <img src="{% static 'images/sushi-illustration.png' %}" alt="sushi illustration"> -->
+    <h2>Are you sure you want to delete {{ order.name }}</h2>
 </div>
 
-<h2>Are you sure you want to delete {{ order.name }}</h2>
 
 <form action="" method="post" class="form">
     {% csrf_token %}
