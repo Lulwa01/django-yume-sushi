@@ -8,15 +8,38 @@
 <div class="page-header">
     <h1 id="create-sushi">Create a Sushi</h1>
     <img src="{% static 'images/sushi-illustration.png' %}" alt="sushi illustration">
-</div>
 
 
 <form action="" method="post" class="form-container">
     {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
+    
+    <div class="row-inline">
+      <div class="form-group">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+      </div>
+      <div class="form-group">
+        {{ form.type.label_tag }}
+        {{ form.type }}
+      </div>
+    </div>
+    
+    <div class="form-group">
+      {{ form.ingredients.label_tag }}
+      <div class="ingredients-group">
+        {% for checkbox in form.ingredients %}
+          <label>{{ checkbox.tag }} {{ checkbox.choice_label }}</label>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="form-group">
+      {{ form.price.label_tag }}
+      {{ form.price }}
+    </div>
+  
     <button type="submit" class="btn submit">Submit</button>
 </form>
+</div>
 
 {% endblock %}
