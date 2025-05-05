@@ -1,43 +1,41 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head id="page-head">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yumi Sushi</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    <link
-    rel="'shortcut icon"
-    type="images/png"
-    href="{% static 'images/yumi-sushi-logo.png' %}"
+    {% block head %}{% endblock %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/yumi-sushi-logo.png' %}" />
 </head>
-<body>
-    <header>
-        <div class="header-logo-container">
-            <a href="/">
-                <img src="{% static 'images/yumi-sushi-logo.png' %}" alt="Yumi Sushi Logo" />
+<body id="page-body" class="page-body">
+    <header id="main-header" class="main-header">
+        <div id="logo-container" class="header-logo-container">
+            <a href="/" id="logo-link" class="logo-link">
+                <img src="{% static 'images/yumi-sushi-logo.png' %}" alt="Yumi Sushi Logo" class="logo-img" />
             </a>
         </div>
-        <nav>
-            <ul>
+        <nav id="main-nav" class="main-nav">
+            <ul id="nav-list">
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'order-create' %}">Create a Sushi</a> </li>
-                <li><a href="{% url 'order-index' %}">Orders</a></li>
-                <li>
-                    <form id="logout-form" method="post" action="{% url 'logout' %}">
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="{% url 'order-create' %}" class="nav-link">Create Sushi</a></li>
+                <li class="nav-item"><a href="{% url 'order-index' %}" class="nav-link">Orders</a></li>
+                <li class="nav-item">
+                    <form id="logout-form" class="logout-form" method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
-                        <button type="submit">Log out</button>
+                        <button type="submit" class="logout-btn">Log out</button>
                     </form>
                 </li>
                 {% else %}
-                <li><a href="{% url 'home' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Sign up</a></li>
+                <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign up</a></li>
                 {% endif %}
             </ul>
         </nav>
     </header>
-    <main>
+    <main id="main-content" class="main-content">
         {% block content %}
         {% endblock %}
     </main>

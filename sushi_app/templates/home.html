@@ -1,31 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block head %}
-<link
-rel="stylesheet"
-href="{% static 'css/home.css' %}"
-/>
-{% endblock %} {%block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %}
 
+{% block content %}
 {% if not user.is_authenticated %}
-<section>
-    <form action="{% url 'home' %}" method="post" class="login">
-        <h1>Login</h1>
-        {% csrf_token %} {{ form.as_p }}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <button type="submit" class="btn submit">Login</button>
-    </form>
+<section id="home-container">
+    <div class="welcome-text">
+        <h1 id="login-title">Login</h1>
+        <form id="login-form" action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+    </div>
+    <!-- <div class="sushi-illustration">
+        <img id="sushi-img" src="{% static 'images/sushi-illustration.png' %}" alt="Sushi Illustration" />
+    </div> -->
 </section>
-
 {% else %}
-<h1>Ready to build new Sushi, {{ user }}</h1>
-<hr />
-<p class="page-content">
-    At Yumi Sushi, youre the chef! Build your own sushi masterpiece, explore fresh ingredients, and let your creativity roll. 🍣✨
-</p>
-<button>
-    <a href="{% url 'order-create' %}">yes</a>
-</button>
-
+<section id="home-container">
+    <div class="welcome-text">
+        <h1 id="welcome-title">Welcome back, {{ user }}!</h1>
+        <p class="intro-text">
+            At Yumi Sushi, you're the chef! Build your own <br>
+            sushi masterpiece, explore fresh ingredients, <br>
+            and let your creativity roll. 🍣✨
+        </p>
+        <a id="start-btn" href="{% url 'order-create' %}">Start</a>
+    </div>
+    <div class="sushi-illustration">
+        <img id="japanese-food-img" src="{% static 'images/japanses_food_table.png' %}" alt="Sushi Illustration" />
+    </div>
+</section>
 {% endif %}
 {% endblock %}

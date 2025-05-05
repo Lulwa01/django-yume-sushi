@@ -38,6 +38,7 @@ class OrderForm(forms.ModelForm):
         widgets = {
             'type': forms.RadioSelect,
             'ingredients': CheckboxSelectMultiple(),
+
         }
 
 class SideForm(forms.ModelForm):
