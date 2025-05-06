@@ -43,7 +43,7 @@ class SushiCreate(LoginRequiredMixin, CreateView):
 
 class SushiUpdate(UpdateView):
     model = Order
-    fields = '__all__'
+    fields = ['name', 'type', 'ingredients', 'price']
 
 class SushiDelete(DeleteView):
     model = Order

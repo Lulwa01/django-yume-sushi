@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
-<h2>Edit Side</h2>
-<form method="post">
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/side_form.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section class="side-edit-container">
+  <h2 class="side-heading">Edit Side</h2>
+
+  <form method="post" class="side-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn submit">Save</button>
-</form>
+    <button type="submit" class="btn submit-btn">Save</button>
+  </form>
+</section>
 {% endblock %}

@@ -7,34 +7,44 @@
 
 {% block content %}
 {% if not user.is_authenticated %}
-<section id="home-container">
-    <div class="welcome-text">
-        <h1 id="login-title">Login</h1>
-        <form id="login-form" action="{% url 'home' %}" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="hidden" name="next" value="{{ next }}" />
-            <button type="submit" class="submit-btn">Login</button>
-        </form>
-    </div>
-    <!-- <div class="sushi-illustration">
-        <img id="sushi-img" src="{% static 'images/sushi-illustration.png' %}" alt="Sushi Illustration" />
-    </div> -->
+
+<div class="bg-image">
+  <img src="{% static 'images/bg-image.png' %}" alt="grids bg image">
+</div>
+
+<section id="login-container">
+  <div id="login-card">
+    <h2 class="login-heading">Log in</h2>
+    <form id="login-form" action="{% url 'home' %}" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+      </div>
+      <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit" class="btn login-btn">Log in</button>
+    </form>
+  </div>
 </section>
+
 {% else %}
 <section id="home-container">
-    <div class="welcome-text">
-        <h1 id="welcome-title">Welcome back, {{ user }}!</h1>
-        <p class="intro-text">
-            At Yumi Sushi, you're the chef! Build your own <br>
-            sushi masterpiece, explore fresh ingredients, <br>
-            and let your creativity roll. 🍣✨
-        </p>
-        <a id="start-btn" href="{% url 'order-create' %}">Start</a>
-    </div>
-    <div class="sushi-illustration">
-        <img id="japanese-food-img" src="{% static 'images/japanses_food_table.png' %}" alt="Sushi Illustration" />
-    </div>
+  <div class="welcome-text">
+    <h1 id="welcome-title">Welcome back, {{ user }}!</h1>
+    <p class="intro-text">
+      At Yumi Sushi, you're the chef! Build your own <br>
+      sushi masterpiece, explore fresh ingredients, <br>
+      and let your creativity roll. 🍣✨
+    </p>
+    <a id="start-btn" href="{% url 'order-create' %}">Start</a>
+  </div>
+  <div class="sushi-illustration">
+    <img id="japanese-food-img" src="{% static 'images/japanses_food_table.png' %}" alt="Sushi Illustration" />
+  </div>
 </section>
 {% endif %}
 {% endblock %}

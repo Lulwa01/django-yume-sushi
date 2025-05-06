@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-
-<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
 {% endblock %}
-{% block content %}
-<div class="page-header">
-    <h1>Sign up</h1>
-</div>
-{% if error_message %}
-<p class="red-text">{{ error_message }}</p>
-{% endif %}
-<form action="" method="post" class="form-container" autocomplete="off">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <button type="submit" class="btn submit">Submit!</button>
-</form>
 
+{% block content %}
+<div class="bg-image">
+  <img src="{% static 'images/bg-image.png' %}" alt="grids bg image">
+</div>
+
+<section id="login-container">
+  <div id="login-card">
+    <h2 class="login-heading">Sign up</h2>
+
+    {% if error_message %}
+      <p class="error-message">{{ error_message }}</p>
+    {% endif %}
+
+    <form method="post" class="signup-form" autocomplete="off">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+      <div class="form-group">
+        {{ form.password1.label_tag }}
+        {{ form.password1 }}
+      </div>
+      <div class="form-group">
+        {{ form.password2.label_tag }}
+        {{ form.password2 }}
+      </div>
+
+      <button type="submit" class="btn login-btn">Sign up</button>
+    </form>
+  </div>
+</section>
 {% endblock %}
