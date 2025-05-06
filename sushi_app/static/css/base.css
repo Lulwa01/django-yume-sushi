@@ -155,14 +155,7 @@
     flex-direction: column;
     gap: 1rem;
   }
-  
-  /* Illustration */
-  #illustration-box {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
+    
   #japanese-food-img {
     position: fixed;
     right: -70px;
@@ -171,5 +164,107 @@
     width: auto;
     z-index: -1;
     object-fit: cover;
+  }
+  
+
+  /* Order Page */
+
+.order-container {
+    margin-top: 40px;
+}
+#orders-header {
+    padding: 3rem 3rem 1rem;
+  }
+  
+  #orders-title {
+    font-size: 3rem;
+    font-weight: 500;
+    color: #511be6;
+    margin-top: -80px;
+
+  }
+  
+  /* Card Container */
+  #orders-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 2rem;
+    padding: 2rem 3rem 4rem;
+  }
+  
+  /* Individual Order Card */
+  .order-card {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    width: 220px;
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+  
+  .order-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .order-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    padding: 1.5rem;
+  }
+  
+  /* Image inside card */
+  .card-img {
+    margin-bottom: 1rem;
+  }
+  
+  .sushi-card-img {
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+  }
+  
+  /* Order Name */
+  .order-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Price */
+  .order-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #511be6;
+  }
+  
+  /* Empty State Message */
+  .no-orders-msg {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #777;
+    padding: 2rem 3rem;
+  }
+  
+  /* Button Container for Empty State */
+  .start-order-btn a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #F4A8C7;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    margin-left: 3rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .start-order-btn a:hover {
+    background-color: #e491b5;
   }
   

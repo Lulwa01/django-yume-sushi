@@ -1,37 +1,40 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
-<link
-    rel="stylesheet"
-    href="{% static 'css/orders/orders-index.css'}"
-/>
-{% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/orders/orders-index.css' %}" />
+{% endblock %}
+{% block content %}
 
-<section class="page-header">
-    <h1>Orders List</h1>
-
+<div class="order-container">
+<section id="orders-header" class="page-header">
+    <h1 id="orders-title">Orders List</h1>
 </section>
 
-<section class="card-container">
+<section id="orders-container" class="card-container">
     {% for order in orders %}
-    <div class="card">
-        <a href="/orders/{{ order.id }}">
-        <div class="card-content">
-            <div class="card-img-container">
-                <img
-                src="{% static 'images/sushi-illustration.png' %}"
-                alt="sushi-illustration"
-                />
+    <div class="order-card">
+        <a href="/orders/{{ order.id }}" class="order-link">
+            <div class="card-content">
+                <div class="card-img">
+                    <img
+                        src="{% static 'images/sushi-illustration.png' %}"
+                        alt="Sushi Illustration"
+                        class="sushi-card-img"
+                    />
+                </div>
+                <h2 class="order-name">{{ order.name }}</h2>
+                <p class="order-price">{{ order.price }}$</p>
             </div>
-            <h2 class="card-title">{{ order.name }}</h2>
-            <p>{{ order.price }}</p>
-        </div>
-    </a>
+        </a>
     </div>
     {% empty %}
-    <p class="empty-message">Opi, no sushi yet 🍣</p>
-    <button>
+    <p class="no-orders-msg">Oops, no sushi yet 🍣</p>
+    <div class="start-order-btn">
         <a href="{% url 'order-create' %}">Start Creating</a>
-    </button>
-    
+    </div>
     {% endfor %}
 </section>
+
+</div>
+
 {% endblock %}
